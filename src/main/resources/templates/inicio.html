@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <!-- Metadatos del documento -->
+  <meta charset="UTF-8">
+  <title>Rueditas</title>
+  <!-- Enlace a la hoja de estilos de Bootstrap -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="container">
+  <!-- Formulario para buscar información de un vehículo -->
+  <form th:action="@{/rueditas/resultado}"  method="post">
+    <!-- Encabezado de la página -->
+    <div class="mt-5 mb-4">
+      <h1>Rueditas</h1>
+    </div>
+    <!-- Alerta de error que muestra mensajes si hay algún problema -->
+    <div class="alert alert-danger" role="alert" th:if="${rueditasModel.codigo != '00'}" id="validationMessage">
+      <span th:text="${rueditasModel.mensaje}"></span>
+    </div>
+    <!-- Campo de entrada para la placa del vehículo -->
+    <div class="mb-3">
+      <label for="placa" class="form-label">Placa del vehículo:</label>
+      <input type="text" id="placa" name="placa" placeholder="Ingrese la placa del vehiculo"
+             class="form-control form-control-lg">
+    </div>
+    <!-- Botón para enviar el formulario -->
+    <div class="d-grid">
+      <button type="submit" class="btn btn-primary btn-lg">Buscar</button>
+    </div>
+  </form>
+</div>
+
+<!-- JavaScript para ocultar el mensaje de validación después de 3 segundos -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const validationMessage = document.getElementById('validationMessage');
+    if (validationMessage) {
+      setTimeout(() => {
+        validationMessage.classList.add('fade-out');
+        setTimeout(() => {
+          validationMessage.style.display = 'none';
+        }, 1000); // Tiempo de la transición
+      }, 1000); // Tiempo antes de empezar a desvanecer
+    }
+  });
+</script>
+
+
+</body>
+</html>
